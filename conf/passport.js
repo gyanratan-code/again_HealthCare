@@ -12,10 +12,10 @@ module.exports = function (passport) {
         callbackURL: '/auth/google/callback',
 				passReqToCallback: true
       },
-      async (accessToken, refreshToken,done, profile ) => {
+      async (req,accessToken, refreshToken, profile,done ) => {
         //get the user data from google 
         // console.log(accessToken,refreshToken,profile);
-        console.log(done);
+        console.log(profile);
         const newUser = {
           googleId: profile.id,
           displayName: profile.displayName,
@@ -27,16 +27,16 @@ module.exports = function (passport) {
 
         try {
           //find the user in our database 
-          let user = await User.findOne({ googleId: profile.id })
+          let user = await User.findOne({ googleId: profile.email })
 
           if (user) {
             //If user present in our database.
-            // done(null, user)
+            done(null, user)
             console.log("User alraedy present");
           } else {
             // if user is not preset in our database save user data to database.
             user = await User.create(newUser)
-            // done(null, user)
+            done(null, user)
             console.log("User created");
           }
         } catch (err) {
