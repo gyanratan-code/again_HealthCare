@@ -15,7 +15,7 @@ module.exports = function (passport) {
       async (req,accessToken, refreshToken, profile,done ) => {
         //get the user data from google 
         // console.log(accessToken,refreshToken,profile);
-        console.log(profile);
+        // console.log(profile);
         const newUser = {
           googleId: profile.id,
           displayName: profile.displayName,
@@ -24,12 +24,12 @@ module.exports = function (passport) {
           image: profile.photos[0].value,
           email: profile.emails[0].value
         }
-
+        console.log(newUser);
         try {
           //find the user in our database 
-          let user = await User.findOne({ googleId: profile.email })
-
-          if (user) {
+          let user = await User.findOne({ googleId: profile.id })
+          // console.log(user);
+          if (user!=null) {
             //If user present in our database.
             done(null, user)
             console.log("User alraedy present");
