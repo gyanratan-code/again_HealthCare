@@ -6,6 +6,7 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const bodyParser = require('body-parser');
 const {getDiseaseInfo}= require('./api/api_disease.js');
+const { fetchUserPrescriptions, bookAppointment } = require('./api/appoint.js');
 require('./conf/passport')(passport);
 
 // Mongo & Template Setup
@@ -42,10 +43,29 @@ mongoose.connect( process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopo
 app.use(require("./routes/index"))
 app.use(require('./routes/auth'))
 app.post('/api/charak',async (req, res)=>{
-      const query = req.body.msg;
-      getDiseaseInfo(query).then((res_)=>{
-          console.log(res_);
-          res.send(JSON.stringify(res_));
+  const query = req.body.msg;
+  getDiseaseInfo(query).then((res_)=>{
+      console.log(res_);
+      res.send(JSON.stringify(res_));
+  })
 })
+
+// here appointment booking
+app.post('/api/book',async(req,res)=>{
+  const opName= req.body.type;
+  const email= req.body.email;
+  if(opName=='fetch'){
+    fetchUserPrescriptions(email).then((resp)=>{
+      console.log(resp);
+      res.send(JSON.stringify(resp))
+    });
+  }
+  else{
+    const query=req.body.msg;
+    bookAppointment(email,query).then((resp)=>{
+      console.log(resp);
+      res.send(JSON.stringify(resp))
+    });
+  }
 })
 app.listen(PORT,console.log(`listening at ${PORT}`))
