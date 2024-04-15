@@ -1,30 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css"
-        integrity="sha256-46r060N2LrChLLb5zowXQ72/iKKNiw/lAmygmHExk/o=" crossorigin="anonymous" />
-    <link rel="stylesheet" href="/css/style.css">
-    <title>Login</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to Charak Healthcare Solutions - Login</title>
+  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://apis.google.com/js/platform.js?onload=onLoadCallback" async defer></script>
+  <style>
+  
+  </style>
 </head>
+<body class="bg-gray-900 text-white">  <div class="fixed top-0 left-0 right-0 bg-indigo-500 text-white px-4 py-2 shadow-md">  <a href="/auth/google" class="font-bold">
+      Charak Healthcare Solutions Login
+    </a>
+    <a href="/auth/google" class="font-bold text-right">HOME</a>
+  </div>
+  <div class="flex justify-between h-screen">
+    <div class="w-1/2 bg-gray text-white px-8 py-6 rounded-md shadow-md flex flex-col justify-center items-center" style="background:linear-gradient(90deg,rgb(1, 56, 20) , rgb(13, 90, 3));">
+        <p class="font-bold text-xl mb-4 text-orange-500">About Charak Healthcare Solutions</p>
+        <p class="text-gray-300">
+          Bhai Idhar hum tumhe convince krrhe.
+            </p>
+      </div>
+      
+    <div class="w-1/2 flex justify-center items-center" style="background:linear-gradient(90deg,rgb(13, 90, 3) , rgb(29, 211, 5));flex-direction: column;">
+      <!-- <div id="ani" style="font-size:x-large;color:rgb(255, 255, 255);">Please Sign In</div> -->
+        <div class="w-full max-w-md px-8 py-6 bg-gradient-to-r from-indigo-700 to-indigo-900 rounded-md shadow-md" style="box-shadow: 3px 3px rgb(139, 231, 27), 15px 15px 10px rgb(139, 231, 27);"> <a href="/auth/google"> <button id="sign-in-btn" class="px-4 py-2 rounded-md bg-indigo-300 text-white font-bold hover:bg-indigo-500" style="color: rgb(6, 25, 54);">Sign in with Google</button></a>
 
-<body>
-    <div class="container login-container">
-        <div class="card" style="margin-top:100px;">
-            <div class="card-content">
-                <div class="section" style="text-align: center;">
-                    <a href="/auth/google" class="btn red darken-1">
-                        <i class="fab fa-google left"></i> Log In With Google
-                    </a>
-                </div>
-            </div>
         </div>
-    </div>
+      </div>
+  </div>
+  <div class="text-center text-gray-500 py-2 bg-gray-700 shadow-md">  <p>&copy; Copyright 2k24 Team Rizzer.js 2.O</p>
+  </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script>
+    // Replace with your actual client ID and homepage URL
+    const CLIENT_ID = 'YOUR_CLIENT_ID';
+    const HOMEPAGE_URL = '[Homepage URL]';
+    const CURRENT_YEAR = new Date().getFullYear(); // Get current year
+
+    function onLoadCallback() {
+      gapi.signin2.render('sign-in-btn', {
+        'scope': 'profile email',
+        'width': 250,
+        'height': 50,
+        'longtitle': true
+      });
+    }
+  </script>
 </body>
-
 </html>
