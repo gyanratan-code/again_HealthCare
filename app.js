@@ -8,11 +8,23 @@ const bodyParser = require('body-parser');
 const {getDiseaseInfo}= require('./api/api_disease.js');
 const { fetchUserPrescriptions, bookAppointment } = require('./api/appoint.js');
 require('./conf/passport')(passport);
-
-// Mongo & Template Setup
+const { ensureAuth, ensureGuest } = require('./middleware/auth')
+const fs = require('fs');
+const path = require('path');
+const {getSkinInfo} = require('./api/api_skin_cancer.js');
+const multer = require('multer');
 var app = express();
 const PORT = process.env.PORT || 3000;
-
+// objects for multer file upload
+const storage = multer.diskStorage({
+  destination: (req, file, cb)=>{
+    cb(null, './images');
+  },
+  filename: (req, file, cb)=>{
+    cb(null, Date.now()+path.extname(file.originalname))
+  }
+})
+const upload = multer({storage:storage});
 app.use(express.static('public'));
 app.set('view engine','ejs');
 
@@ -23,7 +35,6 @@ app.use(
     saveUninitialized: true
   })
 )
-
 // Passport middleware
 app.use(passport.initialize())
 app.use(passport.session())
@@ -38,7 +49,6 @@ mongoose.connect( process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopo
         const db = mongoose.connection.db;
     })
     .catch(err => console.log(err));
-
 // Use Routes
 app.use(require("./routes/index"))
 app.use(require('./routes/auth'))
@@ -67,5 +77,21 @@ app.post('/api/book',async(req,res)=>{
       res.send(JSON.stringify(resp))
     });
   }
+})
+app.post('/api/upload', upload.single("image"), async (req, res)=>{
+  const filename = res.req.file.filename;
+  getSkinInfo(filename).then((res_)=>{
+    console.log(res_)
+    res.send(JSON.stringify(res_));
+  })
+})
+app.get("/charak",ensureAuth, async(req,res)=>{
+  res.render('index_charak',{userinfo:req.user})
+})
+app.get("/image",ensureAuth, async(req,res)=>{
+  res.render('index_image',{userinfo:req.user})
+})
+app.get("/schedule",ensureAuth, async(req,res)=>{
+  res.render('index_schedule',{userinfo:req.user})
 })
 app.listen(PORT,console.log(`listening at ${PORT}`))

@@ -10,10 +10,9 @@
 
 <body class="bg-gray-800 text-gray-100">
   <div class="top-bar flex items-center justify-between bg-green-500 py-2 px-4 shadow-md">
-    <img src="https://i.ibb.co/YD5RHPY/logo.jpg" alt="logo" style="height: 7%;width: 7%;"><h1 class="text-xl font-bold text-white">Charak Healthcare Solutions</h1>
+    <img src="https://i.ibb.co/YD5RHPY/logo.jpg" alt="logo" style="height: 50px;width: 50px;"><h1 class="text-xl font-bold text-white">Charak Healthcare Solutions</h1>
     <a href="/auth/logout"><button id="logout-btn" class="btn btn-danger text-white" >Logout</button></a>
   </div>
-
   <main class="container mx-auto px-4 py-4 flex flex-wrap justify-center align-items: center min-h-screen">
     <section class="user-info bg-gray-700 rounded-lg shadow-md p-4 flex flex-col items-center justify-center w-full md:w-1/3 mr-4">
       <h2 class="text-xl font-bold text-white">Welcome, <span id="username"><%=userinfo.firstName%></span>!</h2>
@@ -26,18 +25,18 @@
         </div>
         <div class="service-content">
           <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div class="service-card hover:bg-gray-600 p-4 rounded-lg">
+            <a href = "/schedule"><div class="service-card hover:bg-gray-600 p-4 rounded-lg">
               <h3 class="font-bold text-white">Online Appointments</h3>
               <p>Schedule appointments with doctors conveniently from anywhere.</p>
-            </div>
-            <div class="service-card hover:bg-gray-600 p-4 rounded-lg">
-              <h3 class="font-bold text-white">Telemedicine Consultations</h3>
-              <p>Connect with healthcare professionals virtually for consultations.</p>
-            </div>
-            <div class="service-card hover:bg-gray-600 p-4 rounded-lg">
-              <h3 class="font-bold text-white">Health Data Management</h3>
-              <p>Track and manage your health data securely and easily.</p>
-            </div>
+            </div></a>
+            <a href = "/charak"> <div class="service-card hover:bg-gray-600 p-4 rounded-lg">
+              <h3 class="font-bold text-white">AI Diagnoser - Charak</h3>
+              <p>A simple AI model to diagnose the disease based on input health data</p>
+            </div></a>
+            <a href="/image"><div class="service-card hover:bg-gray-600 p-4 rounded-lg">
+              <h3 class="font-bold text-white">Skin Disease Detector</h3>
+              <p>An image classification AI model to detect various skin diseases based on the uploaded image of the skin.</p>
+            </div></a>
           </div>
         </div>
       </div>
