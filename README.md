@@ -1,5 +1,5 @@
 # About
-This is a simple Artificial Healthcare app designed for submission in FrostHack 2024 by the team Rizzers.JS 2.0, We have tried to incorporate several features using AI inference API from HugingFacs. This project currently has a working AI disease detector feature, and Appointment Booking Feature.
+This is a simple Artificial Healthcare app designed for submission in FrostHack 2024 by the team Rizzers.JS 2.0, We have tried to incorporate several features using AI inference API from HugingFace. This project currently has a working AI disease detector feature, and Appointment Booking Feature.
 # Steps to run
 1. Get a google Oauth client ID and secret and put in .env file and then put the ngrok static domain/localhost from which you want to send requests for authorization, follow the next two steps if you have used ngrok domain, otherwise go to step 4.
 2. First Set-up an ngrok.exe file in your folder which you can download from the link : https://ngrok.com/download
